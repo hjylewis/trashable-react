@@ -1,0 +1,37 @@
+{
+  "name": "trashable-react",
+  "version": "1.0.0",
+  "description": "A HOC to make React Components garbage collectable when unmounted.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hjylewis/trashable-react.git"
+  },
+  "keywords": [
+    "react",
+    "promise",
+    "javascript",
+    "cancelable",
+    "garbage-collect",
+    "trashable"
+  ],
+  "author": "hjylewis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hjylewis/trashable-react/issues"
+  },
+  "homepage": "https://github.com/hjylewis/trashable-react#readme",
+  "devDependencies": {
+    "eslint": "^4.9.0",
+    "eslint-plugin-react": "^7.4.0"
+  },
+  "peerDependencies": {
+    "react": "^15.0.0 || ^16.0.0"
+  },
+  "dependencies": {
+    "trashable": "^1.0.2"
+  }
+}
