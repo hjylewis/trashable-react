@@ -3,12 +3,9 @@ import makeTrashable from 'trashable';
 
 const makeComponentTrashable = (Component) => {
   class TrashableComponent extends React.Component {
-    constructor(props) {
-      super(props);
-
-      this.promiseStore = {};
-      this.key = 0;
-    }
+    
+    promiseStore = {};
+    key = 0;
 
     componentWillUnmount() {
       const keys = Object.keys(this.promiseStore);
@@ -17,7 +14,7 @@ const makeComponentTrashable = (Component) => {
       });
     }
 
-    addPromise(promise) {
+    addPromise = (promise) => {
       let currentKey = this.key;
       this.promiseStore[currentKey] = promise;
 
@@ -25,11 +22,11 @@ const makeComponentTrashable = (Component) => {
       return currentKey;
     }
 
-    removePromise(key) {
+    removePromise = (key) => {
       delete this.promiseStore[key];
     }
 
-    trackPromise(promise) {
+    trackPromise = (promise) => {
       const trashablePromise = makeTrashable(promise);
       const key = this.addPromise(trashablePromise);
 
