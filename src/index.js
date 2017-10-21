@@ -3,7 +3,7 @@ import makeTrashable from 'trashable';
 
 const makeComponentTrashable = (Component) => {
   class TrashableComponent extends React.Component {
-    
+
     promiseStore = {};
     key = 0;
 
@@ -26,7 +26,7 @@ const makeComponentTrashable = (Component) => {
       delete this.promiseStore[key];
     }
 
-    trackPromise = (promise) => {
+    registerPromise = (promise) => {
       const trashablePromise = makeTrashable(promise);
       const key = this.addPromise(trashablePromise);
 
@@ -42,11 +42,11 @@ const makeComponentTrashable = (Component) => {
 
     render() {
       return (
-        <Component trackPromise={this.trackPromise} {...this.props} />
+        <Component registerPromise={this.registerPromise} {...this.props} />
       );
     }
   }
-  TrashableComponent.displayName = `makeComponentTrashable(${getDisplayName(Component)})`;
+  TrashableComponent.displayName = `Trashable(${getDisplayName(Component)})`;
   return TrashableComponent;
 };
 
