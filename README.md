@@ -16,7 +16,7 @@ npm install --save trashable-react
 import makeComponentTrashable from 'trashable-react';
 
 class Component extends React.Component {
-    didComponentMount() {
+    componentDidMount() {
         this.props.registerPromise(apiCall()).then(() => {
             // ...
         }).catch(() => {
