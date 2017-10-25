@@ -5,12 +5,17 @@ const makeComponentTrashable = (Component) => {
   class TrashableComponent extends React.Component {
 
     promiseStore = {};
+    timeoutStore = [];
     key = 0;
 
     componentWillUnmount() {
       const keys = Object.keys(this.promiseStore);
       keys.forEach((key) => {
         this.promiseStore[key].trash();
+      });
+
+      this.timeoutStore.forEach((timeoutID) => {
+        clearTimeout(timeoutID);
       });
     }
 
@@ -40,9 +45,16 @@ const makeComponentTrashable = (Component) => {
       return trashablePromise;
     }
 
+    registerTimeout = (timeoutID) => {
+      this.timeoutStore.push(timeoutID);
+    }
+
     render() {
       return (
-        <Component registerPromise={this.registerPromise} {...this.props} />
+        <Component
+          registerPromise={this.registerPromise}
+          registerTimeout ={this.registerTimeout}
+          {...this.props} />
       );
     }
   }
