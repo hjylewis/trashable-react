@@ -12,6 +12,8 @@ npm install --save trashable-react
 
 ## How to use
 
+### Promises
+
 ```
 import makeComponentTrashable from 'trashable-react';
 
@@ -22,6 +24,23 @@ class Component extends React.Component {
         }).catch(() => {
             // ...
         });
+    }
+}
+
+// Passes the registerPromise() function to Component
+export default makeComponentTrashable(Component);
+```
+
+### Timeouts
+
+```
+import makeComponentTrashable from 'trashable-react';
+
+class Component extends React.Component {
+    componentDidMount() {
+        this.props.registerTimeout(setTimeout(() => {
+          // ...
+        }, 1000));
     }
 }
 
