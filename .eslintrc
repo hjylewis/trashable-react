@@ -5,7 +5,12 @@
         "es6": true,
         "jest/globals": true
     },
-    "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jest/recommended"],
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:jest/recommended",
+      "plugin:flowtype/recommended"
+    ],
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
@@ -17,6 +22,7 @@
         "react",
         "babel",
         "jest",
+        "flowtype",
     ],
     "rules": {
         "indent": [

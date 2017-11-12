@@ -1,10 +1,16 @@
+// @flow
 import React from 'react';
 import makeTrashable from 'trashable';
 
-const makeComponentTrashable = Component => {
-  class TrashableComponent extends React.Component {
+import type { ComponentType } from 'react';
+import type { TrashablePromise } from 'trashable';
+
+type Key = number;
+
+const makeComponentTrashable = (Component: ComponentType<*>) => {
+  class TrashableComponent extends React.Component<*> {
     promiseStore = {};
-    key = 0;
+    key: Key = 0;
 
     componentWillUnmount() {
       const keys = Object.keys(this.promiseStore);
@@ -13,7 +19,7 @@ const makeComponentTrashable = Component => {
       });
     }
 
-    addPromise = promise => {
+    addPromise = (promise: TrashablePromise<*>): Key => {
       let currentKey = this.key;
       this.promiseStore[currentKey] = promise;
 
@@ -21,15 +27,15 @@ const makeComponentTrashable = Component => {
       return currentKey;
     };
 
-    removePromise = key => {
+    removePromise = (key: Key): void => {
       delete this.promiseStore[key];
     };
 
-    registerPromise = promise => {
+    registerPromise = <T>(promise: Promise<T>): TrashablePromise<T> => {
       const trashablePromise = makeTrashable(promise);
       const key = this.addPromise(trashablePromise);
 
-      const handledPromise = trashablePromise
+      const handledPromise: any = trashablePromise
         .then(() => {
           this.removePromise(key);
         })
@@ -40,7 +46,7 @@ const makeComponentTrashable = Component => {
 
       // Return trashable promise
       handledPromise.trash = trashablePromise.trash;
-      return handledPromise;
+      return (handledPromise: TrashablePromise<T>);
     };
 
     render() {
