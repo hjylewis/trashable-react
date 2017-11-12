@@ -1,44 +1,47 @@
 import React from 'react';
 import makeTrashable from 'trashable';
 
-const makeComponentTrashable = (Component) => {
+const makeComponentTrashable = Component => {
   class TrashableComponent extends React.Component {
-
     promiseStore = {};
     key = 0;
 
     componentWillUnmount() {
       const keys = Object.keys(this.promiseStore);
-      keys.forEach((key) => {
+      keys.forEach(key => {
         this.promiseStore[key].trash();
       });
     }
 
-    addPromise = (promise) => {
+    addPromise = promise => {
       let currentKey = this.key;
       this.promiseStore[currentKey] = promise;
 
       this.key++;
       return currentKey;
-    }
+    };
 
-    removePromise = (key) => {
+    removePromise = key => {
       delete this.promiseStore[key];
-    }
+    };
 
-    registerPromise = (promise) => {
+    registerPromise = promise => {
       const trashablePromise = makeTrashable(promise);
       const key = this.addPromise(trashablePromise);
 
-      trashablePromise.then(() => {
-        this.removePromise(key);
-      }).catch((error) => {
-        this.removePromise(key);
-        return Promise.reject(error);
-      });
+      const handledPromise = trashablePromise
+        .then(() => {
+          this.removePromise(key);
+        })
+        .catch(error => {
+          this.removePromise(key);
+          return Promise.reject(error);
+        });
 
-      return trashablePromise;
-    }
+      // Return trashable promise
+      handledPromise.trash = trashablePromise.trash;
+      return handledPromise;
+    };
 
     render() {
       return (

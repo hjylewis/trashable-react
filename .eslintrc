@@ -1,10 +1,11 @@
 {
+    "parser": "babel-eslint",
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "jest/globals": true
     },
-    "extends": ["eslint:recommended", "plugin:react/recommended"],
-    "parser": "babel-eslint",
+    "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jest/recommended"],
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
@@ -14,7 +15,8 @@
     },
     "plugins": [
         "react",
-        "babel"
+        "babel",
+        "jest",
     ],
     "rules": {
         "indent": [
