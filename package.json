@@ -1,8 +1,7 @@
 {
   "name": "trashable-react",
   "version": "1.0.3",
-  "description":
-    "A HOC to make React Components garbage collectable when unmounted.",
+  "description": "A HOC to make React Components garbage collectable when unmounted.",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src --out-dir dist",
@@ -42,7 +41,10 @@
     "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-jest": "^21.2.0",
     "eslint-plugin-react": "^7.4.0",
-    "jest": "^21.2.1"
+    "husky": "^0.14.3",
+    "jest": "^21.2.1",
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0"
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0"
