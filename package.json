@@ -1,8 +1,7 @@
 {
   "name": "trashable-react",
-  "version": "1.0.3",
-  "description":
-    "A HOC to make React Components garbage collectable when unmounted.",
+  "version": "1.0.4",
+  "description": "A HOC to make React Components garbage collectable when unmounted.",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src --out-dir dist && flow-copy-source src dist",
@@ -14,7 +13,10 @@
     "prepublish": "npm run validate && npm run build"
   },
   "lint-staged": {
-    "*.js": ["prettier --write", "git add"]
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
