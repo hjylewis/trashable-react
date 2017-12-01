@@ -36,8 +36,9 @@ const makeComponentTrashable = (Component: ComponentType<*>) => {
       const key = this.addPromise(trashablePromise);
 
       const handledPromise: any = trashablePromise
-        .then(() => {
+        .then(value => {
           this.removePromise(key);
+          return Promise.resolve(value);
         })
         .catch(error => {
           this.removePromise(key);

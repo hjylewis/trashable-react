@@ -65,6 +65,28 @@ describe('makeComponentTrashable()', () => {
       expect(wrapper.instance().promiseStore[key]).toBeDefined();
     });
 
+    it('returns promise that passes the original resolved value', () => {
+      const value = 'foo';
+      const wrapper = shallow(<TrashableComponent />);
+      const trashable = wrapper
+        .instance()
+        .registerPromise(Promise.resolve(value));
+      return trashable.then(ret => {
+        expect(ret).toEqual(value);
+      });
+    });
+
+    it('returns promise that passes the original rejected value', () => {
+      const value = 'foo';
+      const wrapper = shallow(<TrashableComponent />);
+      const trashable = wrapper
+        .instance()
+        .registerPromise(Promise.reject(value));
+      return trashable.catch(ret => {
+        expect(ret).toEqual(value);
+      });
+    });
+
     it('returns a trashable promise', () => {
       const timeoutPromise = delay => {
         return new Promise(resolve => {
