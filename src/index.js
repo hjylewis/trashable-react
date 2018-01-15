@@ -46,7 +46,10 @@ const makeComponentTrashable = (Component: ComponentType<*>) => {
         });
 
       // Return trashable promise
-      handledPromise.trash = trashablePromise.trash;
+      handledPromise.trash = () => {
+        this.removePromise(key);
+        trashablePromise.trash();
+      };
       return (handledPromise: TrashablePromise<T>);
     };
 
