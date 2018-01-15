@@ -135,6 +135,16 @@ describe('makeComponentTrashable()', () => {
       });
     });
 
+    it('removes promise from store when trashed', () => {
+      const wrapper = shallow(<TrashableComponent />);
+      const key = wrapper.instance().key;
+      const promise = new Promise(() => {});
+      const trashable = wrapper.instance().registerPromise(promise);
+      expect(wrapper.instance().promiseStore[key]).toBeDefined();
+      trashable.trash();
+      expect(wrapper.instance().promiseStore[key]).toBeUndefined();
+    });
+
     it('passes a registerPromise prop', () => {
       const wrapper = shallow(<TrashableComponent />);
       expect(wrapper.find(Component).prop('registerPromise')).toBeTruthy();
