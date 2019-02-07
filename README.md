@@ -1,6 +1,5 @@
 # trashable-react :put_litter_in_its_place:
 [![npm](https://img.shields.io/npm/v/trashable-react.svg?style=flat-square)](https://www.npmjs.com/package/trashable-react)
-[![NPM file size](http://img.badgesize.io/https://npmcdn.com/trashable-react/dist/index.js?style=flat-square)](https://www.npmjs.com/package/trashable-react)
 [![David](https://david-dm.org/hjylewis/trashable-react.svg?style=flat-square)](https://www.npmjs.com/package/trashable-react)
 [![CircleCI](https://img.shields.io/circleci/project/github/hjylewis/trashable-react/master.svg?style=flat-square)](https://circleci.com/gh/hjylewis/trashable-react)
 [![npm](https://img.shields.io/npm/l/trashable-react.svg?style=flat-square)](https://github.com/hjylewis/trashable-react/blob/master/LICENSE)
