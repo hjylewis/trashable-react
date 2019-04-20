@@ -2,13 +2,21 @@
 import React from 'react';
 import makeTrashable from 'trashable';
 
-import type { ComponentType } from 'react';
+import type { AbstractComponent } from 'react';
 import type { TrashablePromise } from 'trashable';
+
+type RegisterPromiseType = <T>(promise: Promise<T>) => TrashablePromise<T>;
+
+export type TrashableReactProps = {
+  registerPromise: RegisterPromiseType,
+};
 
 type Key = number;
 
-const makeComponentTrashable = (Component: ComponentType<*>) => {
-  class TrashableComponent extends React.Component<*> {
+function makeComponentTrashable<Config: *>(
+  Component: AbstractComponent<Config>
+): AbstractComponent<$Diff<Config, TrashableReactProps>> {
+  class TrashableComponent extends React.Component<Config> {
     promiseStore = {};
     key: Key = 0;
 
@@ -31,7 +39,9 @@ const makeComponentTrashable = (Component: ComponentType<*>) => {
       delete this.promiseStore[key];
     };
 
-    registerPromise = <T>(promise: Promise<T>): TrashablePromise<T> => {
+    registerPromise: RegisterPromiseType = <T>(
+      promise: Promise<T>
+    ): TrashablePromise<T> => {
       const trashablePromise = makeTrashable(promise);
       const key = this.addPromise(trashablePromise);
 
@@ -61,7 +71,7 @@ const makeComponentTrashable = (Component: ComponentType<*>) => {
   }
   TrashableComponent.displayName = `Trashable(${getDisplayName(Component)})`;
   return TrashableComponent;
-};
+}
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
