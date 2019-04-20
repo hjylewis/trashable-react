@@ -1,6 +1,6 @@
 {
   "name": "trashable-react",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "A HOC to make React Components garbage collectable when unmounted.",
   "main": "dist/index.js",
   "scripts": {
